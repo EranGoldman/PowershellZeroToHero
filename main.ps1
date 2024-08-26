@@ -113,7 +113,8 @@ Hello! Welcome to the ''Powershell Zero to Hero'' game!
 The name is pretty indicative so without further ado, some instructions:
 
 1. The basic structure of a Powershell command resembles a CMD command structure of <Command> [-Parameters [Parameters'' Value]] [| <Another Command>]
-For instance: Get-Process -Name "chrome" | Stop-Process
+For instance: Get-Process -Name "chrome" | Stop-Process.
+Basically, every PS command is meant to do a specific task and can be customized with parameters. The output of any command can have different members or methods, and can be piped to another command that accepts a certain type of output to further process it.
 
 2. The goal of this game is to answer all the questions one by one. When you answer correctly, you advance to the next question. 
 
@@ -492,7 +493,7 @@ $questions = @(
     [Question]::new(12, 'code', 'What is the creation date of the process winint.exe? Format: YYYYMMDDHHmmSS.sss ', { $date = Get-WmiObject win32_process | Where-Object {$_.name -eq "wininit.exe"} | Select-Object -ExpandProperty CreationDate | out-string; $dotPosition = $date.IndexOf('.'); return $date.Substring(0,$dotPosition+ 4)}, '', "WMI is the real deal. Here is an example for an answer '20240131102618.284'"),
     [Question]::new(13, 'default', "Copy and paste this hashtable to your own terminal, find the hidden message:`n$sort_hashtable", $null , 'MakePowershellYourGoToLanguage','If you sort the hashtable by the keys, what do you get with the values?'), # ($hashtable.GetEnumerator() | Sort-Object Name -Descending).Value -join ''
 [Question]::new(14, 'default', 'My name is Omri, and I love vowels. If you''d remove all OTHER characters from this very question, you will get your answer!', $null, 'aeiOiaIoeoeIoueoeaoeaaeoieueioouieouae', "Either Regex or '-replace' would do the trick!"), #-replace '[^aeiouAEIOU]', ''
-[Question]::new(15, 'code', "What is the alphabetically first property in your registry's Run key ($($r_key_prefix_1 + $r_key))?", { $($(Get-Item $($r_key_prefix_2 +$r_key)).Property | Sort-Object)[0] }, '')
+[Question]::new(15, 'code', "What is the alphabetically first property in your registry's Run key ($($r_key_prefix_1 + $r_key))?", { $obj = $(Get-Item $($r_key_prefix_2 +$r_key)).Property | Sort-Object; if ($obj -is [system.array]){$obj[0]}else{$obj} }, '')
 [Question]::new(16, 'setup', 'Check out the IIS log file at ''C:\Users\Public\iis.log''. Go over the logs and find the most common Status Code (use Foreach-Object and regex)', { if (-not (Test-Path "C:\Users\Public\iis.log")) {Out-File -FilePath "C:\Users\Public\iis.log" -Encoding utf8 -Force -InputObject $iis_logs} }, '303', 'After using the ''-match'' operator some stuff are being populated to the $Matches variable.') 
 <#
 $codes = @() # It is super not efficient to use @() for adding elements to an array since arrays have fixed sizes, it's better to use dynamic objects. But it's just simple for this use case. Read more here - https://learn.microsoft.com/en-us/powershell/scripting/dev-cross-plat/performance/script-authoring-considerations?view=powershell-7.4#array-addition
