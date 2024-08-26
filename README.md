@@ -3,13 +3,13 @@
 This is a terminal educational game to learn PowerShell through hands-on problem solving to teach the nuances of the code language. It's suitable for individual learning or as a team activity with one instructor.
 
 ## About the game
-The code is written in PowerShell. The player is asked with questions that are tailored to the system that runs the code. To find the answers, the player would need to utilize new PowerShell concepts each time on his/her own that gets harder as the game progresses.
+The code is written in PowerShell. The player is asked with questions that are tailored to the system that runs the code. To find the answers, the player would need to utilize new PowerShell concepts each time on his/her own that gets harder as the game progresses. PowerShell's `Get-Help` and the internet are legitimate tools. 
 <br>For those unfamiliar with PowerShell, completing the game (excluding bonus questions) should take about 3-5 hours. More advanced users may finish it quicker, though the bonus questions will provide additional challenges ;)
 
 ## How to run
 
 The PowerShell code is compiled into an executable using [PS2EXE](https://github.com/MScholtes/PS2EXE), making it easy for players to run the game as a standalone black-box application. The executable is zipped and can be downloaded from the **Releases** section, using the password of `infected`. Some AVs may flag the executable as suspicious because of the compilation method. 
-Therefore running it on a VM is recommended. <br>If using a VM is a problem, the game can also be run by executing `main.ps1` with `powershell.exe -f main.ps1` on any system, but the unrighteous players would be able to look at the code in plaintext and see the answers. You might need to change the execution policy first `Set-ExecutionPolicy Bypass` on an administrator PowerShell terminal. The actual game instructions are inline.
+Therefore running it on a VM is recommended. <br>If using a VM is a problem, the game can also be run by executing `main.ps1` with `powershell.exe -f main.ps1` on any system, but the unrighteous players would be able to look at the code in plaintext and see the answers. You might need to change the execution policy first `Set-ExecutionPolicy Bypass` on an administrator PowerShell terminal. The actual game instructions are inline.<br>In case changes are made in the `main.ps1` file and compilation is needed, check out the [Github Action .yml file](.github/workflows/build-ps1-to-exe.yml) to see how it is being done.
 
 ## Instructions for the instructor
 
